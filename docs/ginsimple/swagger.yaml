@@ -1,0 +1,79 @@
+definitions:
+  structs.Status:
+    properties:
+      code:
+        description: |-
+          Code http
+          in: uint16
+        type: integer
+      message:
+        description: |-
+          Message
+          in: string
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/:
+    get:
+      description: Return a message with text 'Hello, World!'.
+      parameters:
+      - description: User Agent
+        in: header
+        name: User-Agent
+        required: true
+        type: string
+      - description: Authentication Token
+        in: header
+        name: x-NBDS-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/structs.Status'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/structs.Status'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/structs.Status'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/structs.Status'
+        "429":
+          description: Too Many Requests
+          schema:
+            $ref: '#/definitions/structs.Status'
+      summary: Hello, World!
+      tags:
+      - private
+  /status:
+    get:
+      description: Return message with text "Pong".
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 200 response
+          schema:
+            $ref: '#/definitions/structs.Status'
+        "404":
+          description: 404 response
+          schema:
+            $ref: '#/definitions/structs.Status'
+        "429":
+          description: 429 response
+          schema:
+            $ref: '#/definitions/structs.Status'
+      summary: Check status from server.
+      tags:
+      - public
+swagger: "2.0"

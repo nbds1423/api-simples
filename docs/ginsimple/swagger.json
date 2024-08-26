@@ -1,0 +1,115 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/": {
+            "get": {
+                "description": "Return a message with text 'Hello, World!'.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "private"
+                ],
+                "summary": "Hello, World!",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User Agent",
+                        "name": "User-Agent",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Authentication Token",
+                        "name": "x-NBDS-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Requests",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    }
+                }
+            }
+        },
+        "/status": {
+            "get": {
+                "description": "Return message with text \"Pong\".",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "public"
+                ],
+                "summary": "Check status from server.",
+                "responses": {
+                    "200": {
+                        "description": "200 response",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    },
+                    "404": {
+                        "description": "404 response",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    },
+                    "429": {
+                        "description": "429 response",
+                        "schema": {
+                            "$ref": "#/definitions/structs.Status"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "structs.Status": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Code http\nin: uint16",
+                    "type": "integer"
+                },
+                "message": {
+                    "description": "Message\nin: string",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

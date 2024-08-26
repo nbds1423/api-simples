@@ -1,0 +1,87 @@
+basePath: /
+definitions:
+  ErrorResponse:
+    properties:
+      code:
+        description: |-
+          Code http
+          in: uint16
+        type: integer
+      message:
+        description: |-
+          Message
+          in: string
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: NBDS Documentation
+  title: NBDS API using Gin
+  version: "1.0"
+paths:
+  /api/:
+    get:
+      description: Return a message with text 'Hello, World!'.
+      parameters:
+      - description: User Agent
+        in: header
+        name: User-Agent
+        required: true
+        type: string
+      - description: Authentication Token
+        in: header
+        name: x-nbds-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "429":
+          description: Too Many Requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Hello, World!
+      tags:
+      - private
+  /status:
+    get:
+      description: Return message with text "Pong".
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 200 response
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "404":
+          description: 404 response
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        "429":
+          description: 429 response
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Check status from server.
+      tags:
+      - public
+schemes:
+- http
+- https
+swagger: "2.0"
